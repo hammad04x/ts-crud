@@ -1,11 +1,11 @@
-import connection from "../src/config/connection";
 import express from "express";
+import cors from "cors"
+import router from "./routes/user";
 
 const app = express();
 
-app.get("/", (req: Request, res: Response) => {
-    res.send("TS server is breathing");
-});
+app.use(cors());
+app.use("/", router);
 
 app.listen(5000, () => {
     console.log("Server running on port 5000");
