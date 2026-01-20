@@ -1,9 +1,10 @@
+import Getuser from "./user/Getuser"
 
 function App() {
 
   return (
     <>
-      <h1>Hello World</h1>
+      <Getuser />
     </>
   )
 }
