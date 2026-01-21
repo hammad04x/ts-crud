@@ -1,10 +1,10 @@
-import Getuser from "./user/Getuser"
+import HomeRoute from "./HomeRoutes"
 
 function App() {
 
   return (
     <>
-      <Getuser />
+      <HomeRoute />
     </>
   )
 }

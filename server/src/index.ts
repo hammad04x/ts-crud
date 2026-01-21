@@ -4,6 +4,8 @@ import router from "./routes/user";
 
 const app = express();
 
+app.use("/upload", express.static("upload"));
+
 app.use(cors());
 app.use("/", router);
 
