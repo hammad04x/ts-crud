@@ -21,12 +21,13 @@ function Getuser() {
     }
   };
 
-  const deleteUser=async(userId:number)=>{
+  const deleteUser = async (userId: number) => {
     try {
       await axios.delete<User[]>(`http://localhost:5000/deleteuser/${userId}`)
-      alert("HEHEHEHe")
+      alert("DELETED")
+      fetchData()
     } catch (error) {
-      alert("LOLOLOLOLO")
+      alert("FAILED TO DELETE")
     }
   }
 
@@ -44,23 +45,33 @@ function Getuser() {
         </NavLink>
       </>
       <>
-        {data.map((user) => (
-          <ul key={user.id}>
-            <li>{user.id}</li>
-            <li>{user.name}</li>
-            <li>
-              {<img src={`http://localhost:5000/upload/${user.img}`} width={"80px"} />}
-            </li>
-            <li>
-              <NavLink to={`/EditUser/${user.id}`}>
-              <button>Edit</button>
-              </NavLink>
-            </li>
-            <li>
-              <button onClick={()=> deleteUser(user.id)}>Delete</button>
-            </li>
-          </ul>
-        ))}
+        <table>
+          <thead>
+            <tr style={{ display: "flex", gap: "10px", }}>
+              <th>Id</th>
+              <th>Name</th>
+              <th>Images</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {data.map((user) => (
+              <tr key={user.id} >
+                <td>{user.id}</td>
+                <td>{user.name}</td>
+                <td>
+                  {<img src={`http://localhost:5000/upload/${user.img}`} width={"80px"} />}
+                </td>
+                <td>
+                  <NavLink to={`/EditUser/${user.id}`}>
+                    <button>Edit</button>
+                  </NavLink>
+                  <button onClick={() => deleteUser(user.id)}>Delete</button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </>
     </div>
   );

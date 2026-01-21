@@ -1,12 +1,7 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-type User = {
-  id: number;
-  name: string;
-  img: string; 
-};
 
 function AddData() {
   const navigate=useNavigate()
@@ -15,17 +10,7 @@ function AddData() {
   const [img, setImg] = useState<File | undefined>(undefined);
 
 
-  const getData = async () => {
-    try {
-      await axios.get<User[]>("http://localhost:5000/getuser");
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  useEffect(() => {
-    getData();
-  }, []);
+ 
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -39,14 +24,14 @@ function AddData() {
 
       await axios.post("http://localhost:5000/adduser",formData);
 
-      alert("DATA ADDED ✅");
+      alert("DATA ADDED");
 
       setName("");
       setImg(undefined);
       navigate("/")
     } catch (error) {
       console.error(error);
-      alert("ERROR TO ADD DATA ❌");
+      alert("ERROR TO ADD DATA");
     }
   };
 
